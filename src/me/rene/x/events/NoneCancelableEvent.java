@@ -1,2 +1,3 @@
-package me.rene.x.events;public class NoneCancelableEvent {
-}
+package me.rene.x.events;
+
+public interface NoneCancelableEvent {}
