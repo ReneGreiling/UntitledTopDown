@@ -13,7 +13,7 @@ public class Projectile extends Entity {
 
     public Projectile() {
         this.setSize(new Vector2(.3, .3));
-        lifetime = 5;
+        lifetime = 2;
     }
 
     public Entity getLauncher() {

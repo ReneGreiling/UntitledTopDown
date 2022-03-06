@@ -50,7 +50,7 @@ public abstract class LivingEntity extends Entity {
     }
 
     public <T extends Projectile>T launchProjectile(Class<T> projectile) {
-        T instance = launchProjectile(projectile, this.direction);
+        T instance = launchProjectile(projectile, this.direction.multiply(5));
         instance.setLauncher(this);
         //todo calculate damage
         instance.setDmg(1);

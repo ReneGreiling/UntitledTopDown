@@ -12,12 +12,13 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class GameManager implements Manager {
+    private ArrayList<Entity> entitiesToRemove = new ArrayList<>();
 
-    ArrayList<Entity> entities = new ArrayList<>();
-    ArrayList<Particle> particle = new ArrayList<>();
+    private ArrayList<Entity> entities = new ArrayList<>();
+    private ArrayList<Particle> particle = new ArrayList<>();
     
-    Player player = spawn(Player.class, new Vector2());
-    Camera camera = new Camera(new Vector2(), 1920./16);
+    private Player player = spawn(Player.class, new Vector2());
+    private Camera camera = new Camera(new Vector2(), 1920./16);
 
     public GameManager() {
         spawn(Dummy.class, new Vector2(8 - .3, 2));
@@ -125,6 +126,9 @@ public class GameManager implements Manager {
 
         if (!v.equals(new Vector2()))
             EventManager.execEvent(new PlayerMoveEvent(player, player.getLocation().add(v)));
+
+        entities.removeAll(entitiesToRemove);
+        entitiesToRemove.clear();
     }
 
     public void addParticle(Particle particle) {
@@ -144,6 +148,6 @@ public class GameManager implements Manager {
     }
 
     public void removeEntity(Entity e) {
-        entities.remove(e);
+        entitiesToRemove.add(e);
     }
 }
