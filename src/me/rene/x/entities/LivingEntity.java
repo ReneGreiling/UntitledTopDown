@@ -6,11 +6,14 @@ public abstract class LivingEntity extends Entity {
 
     private long health;
     private long maxHealth;
+    private Vector2 direction;
+    private boolean dead;
 
-    public LivingEntity(Vector2 location, Vector2 size, long health) {
-        super(location, size);
-        this.maxHealth = health;
-        this.health = health;
+    public LivingEntity() {
+        this.maxHealth = 0;
+        this.health = 0;
+        this.direction = Vector2.UP;
+        this.dead = false;
     }
 
     public long getHealth() {
@@ -27,5 +30,30 @@ public abstract class LivingEntity extends Entity {
 
     public void setMaxHealth(long maxHealth) {
         this.maxHealth = maxHealth;
+    }
+
+    public Vector2 getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Vector2 direction) {
+        this.direction = direction;
+    }
+
+    public boolean isDead() {
+        return dead;
+    }
+
+    public void setDead(boolean dead) {
+        this.dead = dead;
+        if (dead) this.setVisible(false);
+    }
+
+    public <T extends Projectile>T launchProjectile(Class<T> projectile) {
+        T instance = launchProjectile(projectile, this.direction);
+        instance.setLauncher(this);
+        //todo calculate damage
+        instance.setDmg(1);
+        return instance;
     }
 }

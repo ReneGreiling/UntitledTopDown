@@ -6,6 +6,9 @@ public class Vector2 {
 
     public double x, y;
 
+    public static final Vector2 UP = new Vector2(0, -1),
+            LEFT = new Vector2(-1, 0), DOWN = new Vector2(0, 1), RIGHT = new Vector2(1, 0), NULL = new Vector2();
+
     public Vector2() {
         this(0, 0);
     }

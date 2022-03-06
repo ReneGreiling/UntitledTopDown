@@ -1,9 +1,7 @@
 package me.rene.x.gm;
 
-import me.rene.x.entities.Dummy;
-import me.rene.x.entities.Player;
-import me.rene.x.events.EntityDamageByEntityEvent;
-import me.rene.x.events.EventManager;
+import me.rene.x.entities.*;
+import me.rene.x.events.*;
 import me.rene.x.io.Input;
 import me.rene.x.particle.Particle;
 import me.rene.x.particle.TextParticle;
@@ -15,23 +13,36 @@ import java.util.ArrayList;
 
 public class GameManager implements Manager {
 
+    ArrayList<Entity> entities = new ArrayList<>();
     ArrayList<Particle> particle = new ArrayList<>();
-
-    Dummy dummy = new Dummy(new Vector2(8 - .3, 2));
     
-    Player player = new Player(new Vector2(),10);
+    Player player = spawn(Player.class, new Vector2());
     Camera camera = new Camera(new Vector2(), 1920./16);
 
-
+    public GameManager() {
+        spawn(Dummy.class, new Vector2(8 - .3, 2));
+    }
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.BLUE);
-
-        g.fillRect((int) camera.getLocationOnPanel(dummy.getLocation()).x,
-                (int) camera.getLocationOnPanel(dummy.getLocation()).y,
-                (int) camera.getLocationOnPanel(dummy.getSize()).x,
-                (int) camera.getLocationOnPanel(dummy.getSize()).y);
+        entities.forEach(e -> {
+            if (camera.isEntityShownByCamera(e) && e.isVisible()) {
+                //todo draw entities
+                if (e instanceof Dummy) {
+                    g.setColor(Color.BLUE);
+                    g.fillRect((int) camera.getLocationOnPanel(e.getLocation()).x,
+                            (int) camera.getLocationOnPanel(e.getLocation()).y,
+                            (int) camera.getLocationOnPanel(e.getSize()).x,
+                            (int) camera.getLocationOnPanel(e.getSize()).y);
+                } else if (e instanceof Projectile) {
+                    g.setColor(Color.MAGENTA);
+                    g.fillOval((int) camera.getLocationOnPanel(e.getLocation()).x,
+                            (int) camera.getLocationOnPanel(e.getLocation()).y,
+                            (int) camera.getLocationOnPanel(e.getSize()).x,
+                            (int) camera.getLocationOnPanel(e.getSize()).y);
+                }
+            }
+        });
 
         g.setColor(Color.BLACK);
 
@@ -49,19 +60,21 @@ public class GameManager implements Manager {
                 (int) playerSizeOnScreen.y);
 
         Vector2 aimDirLinePoint2 = playerLocOnPanel.add(playerSizeOnScreen.divide(2))
-                .add(camera.getLocationOnPanel(Input.lastMouseLocationOnPanel.subtract(playerLocOnPanel
-                        .add(playerSizeOnScreen.divide(2))).normalise().divide(2)));
+                .add(camera.getLocationOnPanel(player.getDirection().divide(2)));
 
         g.drawLine((int) (playerLocOnPanel.x + playerSizeOnScreen.x / 2),
                 ((int) (playerLocOnPanel.y + playerSizeOnScreen.y / 2)),
                 (int) aimDirLinePoint2.x, (int) aimDirLinePoint2.y);
 
+        Font font1 = new Font("Arial", Font.BOLD, (int) (camera.getSize() * .2));
+
         particle.forEach(p -> {
             if (p instanceof TextParticle) {
                 TextParticle tp = (TextParticle) p;
                 g.setColor(tp.getColor());
-                g.setFont(new Font("Arial", Font.BOLD, (int) (camera.getSize() * .2)));
-                g.drawString(tp.getText(), (int) camera.getLocationOnPanel(tp.getLocation()).x,
+                g.setFont(font1);
+                g.drawString(tp.getText(), (int) camera.getLocationOnPanel(tp.getLocation()).x -
+                        (g.getFontMetrics().stringWidth(tp.getText()) / 2),
                         (int) camera.getLocationOnPanel(tp.getLocation()).y);
             }
         });
@@ -87,6 +100,10 @@ public class GameManager implements Manager {
             v = v.add(new Vector2(1, 0));
         }
 
+        player.setDirection(camera.getInWorldLocation(Input.lastMouseLocationOnPanel).subtract(player.getLocation()
+                .add(player.getSize().divide(2))).normalise());
+
+        //Remove expired particle
         ArrayList<Particle> toRemove = new ArrayList<>();
         particle.forEach(p -> {
             p.lowerRemainingTimeVisibleBy(dt);
@@ -97,12 +114,36 @@ public class GameManager implements Manager {
         particle.removeAll(toRemove);
         toRemove.clear();
 
+        particle.forEach(p -> p.setLocation(p.getLocation().add(p.getVelocity().multiply(10*dt))));
+
+        entities.forEach(e -> e.update(dt));
+
+        if (Input.isKeyDown(Input.InputType.ATTACK))
+            EventManager.execEvent(new EntityLaunchProjectileEvent(player, player.launchProjectile(Projectile.class)));
+
         v = v.normalise().multiply(dt*10);
 
-        player.setLocation(player.getLocation().add(v));
+        if (!v.equals(new Vector2()))
+            EventManager.execEvent(new PlayerMoveEvent(player, player.getLocation().add(v)));
     }
 
     public void addParticle(Particle particle) {
         this.particle.add(particle);
+    }
+
+    public <T extends Entity>T spawn(Class<T> entity, Vector2 location) {
+        try {
+            T instance = entity.newInstance();
+            instance.setLocation(location);
+            entities.add(instance);
+            return instance;
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void removeEntity(Entity e) {
+        entities.remove(e);
     }
 }

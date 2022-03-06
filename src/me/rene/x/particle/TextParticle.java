@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class TextParticle implements Particle {
     private String text;
-    private final Vector2 location;
+    private Vector2 location;
     private Color color;
     private Vector2 velocity;
     private float remainingTimeVisible;
@@ -53,6 +53,11 @@ public class TextParticle implements Particle {
     @Override
     public void lowerRemainingTimeVisibleBy(float time) {
         remainingTimeVisible -= time;
+    }
+
+    @Override
+    public void setLocation(Vector2 location) {
+        this.location = location;
     }
 
     public void setVelocity(Vector2 velocity) {

@@ -7,4 +7,5 @@ public interface Particle {
     Vector2 getVelocity();
     float getRemainingTimeVisible();
     void lowerRemainingTimeVisibleBy(float time);
+    void setLocation(Vector2 location);
 }

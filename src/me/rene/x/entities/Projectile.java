@@ -1,14 +1,19 @@
 package me.rene.x.entities;
 
+import me.rene.x.Main;
+import me.rene.x.gm.GameManager;
 import me.rene.x.utils.Vector2;
 
 public class Projectile extends Entity {
 
     private Entity launcher;
     private int dmg;
+    private Vector2 velocity;
+    private float lifetime;
 
-    public Projectile(Vector2 location, Vector2 size) {
-        super(location, size);
+    public Projectile() {
+        this.setSize(new Vector2(.3, .3));
+        lifetime = 5;
     }
 
     public Entity getLauncher() {
@@ -25,5 +30,24 @@ public class Projectile extends Entity {
 
     public void setDmg(int dmg) {
         this.dmg = dmg;
+    }
+
+    public Vector2 getVelocity() {
+        return velocity;
+    }
+
+    public void setVelocity(Vector2 velocity) {
+        this.velocity = velocity;
+    }
+
+    @Override
+    public void update(float dt) {
+        lifetime -= dt;
+        if (lifetime < 0)
+            ((GameManager) Main.instance.manager).removeEntity(this);
+
+        //todo collisions
+        if (velocity != null)
+            this.setLocation(getLocation().add(velocity.multiply(dt*10)));
     }
 }
