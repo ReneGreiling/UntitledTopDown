@@ -44,7 +44,7 @@ public abstract class Entity {
 
     public <T extends Projectile>T launchProjectile(Class<T> projectile, Vector2 velocity) {
         T instance = ((GameManager) Main.instance.manager).spawn(projectile,
-                this.getLocation().add(this.getSize().divide(2)).add(velocity.divide(2)));
+                this.getLocation().add(this.getSize().divide(2)).add(velocity.normalise().divide(2)));
         instance.setVelocity(velocity);
         instance.setLocation(instance.getLocation().subtract(instance.getSize().divide(2)));
         instance.setLauncher(this);
