@@ -7,8 +7,6 @@ import com.gmail.greiling_rn.untitledTopDown.entities.Projectile;
 import com.gmail.greiling_rn.untitledTopDown.events.EntityLaunchProjectileEvent;
 import com.gmail.greiling_rn.untitledTopDown.events.EventManager;
 import com.gmail.greiling_rn.untitledTopDown.events.PlayerMoveEvent;
-import me.rene.x.entities.*;
-import me.rene.x.events.*;
 import com.gmail.greiling_rn.untitledTopDown.io.Input;
 import com.gmail.greiling_rn.untitledTopDown.particle.Particle;
 import com.gmail.greiling_rn.untitledTopDown.particle.TextParticle;
