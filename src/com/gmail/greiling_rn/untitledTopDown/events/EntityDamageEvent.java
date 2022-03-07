@@ -1,6 +1,6 @@
-package me.rene.x.events;
+package com.gmail.greiling_rn.untitledTopDown.events;
 
-import me.rene.x.entities.LivingEntity;
+import com.gmail.greiling_rn.untitledTopDown.entities.LivingEntity;
 
 public class EntityDamageEvent extends Event {
     private LivingEntity entity;

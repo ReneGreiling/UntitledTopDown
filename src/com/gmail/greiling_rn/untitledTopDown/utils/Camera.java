@@ -1,7 +1,7 @@
-package me.rene.x.utils;
+package com.gmail.greiling_rn.untitledTopDown.utils;
 
-import me.rene.x.Main;
-import me.rene.x.entities.Entity;
+import com.gmail.greiling_rn.untitledTopDown.entities.Entity;
+import com.gmail.greiling_rn.untitledTopDown.Main;
 
 public class Camera {
     Vector2 location;

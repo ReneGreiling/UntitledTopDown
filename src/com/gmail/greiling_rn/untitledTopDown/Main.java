@@ -1,8 +1,8 @@
-package me.rene.x;
+package com.gmail.greiling_rn.untitledTopDown;
 
-import me.rene.x.gm.GameManager;
-import me.rene.x.gm.Manager;
-import me.rene.x.io.Input;
+import com.gmail.greiling_rn.untitledTopDown.gm.GameManager;
+import com.gmail.greiling_rn.untitledTopDown.gm.Manager;
+import com.gmail.greiling_rn.untitledTopDown.io.Input;
 
 import javax.swing.*;
 import java.awt.*;

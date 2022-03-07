@@ -1,7 +1,7 @@
-package me.rene.x.io;
+package com.gmail.greiling_rn.untitledTopDown.io;
 
-import me.rene.x.Main;
-import me.rene.x.utils.Vector2;
+import com.gmail.greiling_rn.untitledTopDown.Main;
+import com.gmail.greiling_rn.untitledTopDown.utils.Vector2;
 
 import java.awt.event.*;
 

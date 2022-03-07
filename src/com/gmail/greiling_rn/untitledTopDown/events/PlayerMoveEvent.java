@@ -1,7 +1,7 @@
-package me.rene.x.events;
+package com.gmail.greiling_rn.untitledTopDown.events;
 
-import me.rene.x.entities.Player;
-import me.rene.x.utils.Vector2;
+import com.gmail.greiling_rn.untitledTopDown.entities.Player;
+import com.gmail.greiling_rn.untitledTopDown.utils.Vector2;
 
 public class PlayerMoveEvent extends Event {
     private Player player;

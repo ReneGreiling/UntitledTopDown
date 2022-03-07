@@ -1,6 +1,4 @@
-package me.rene.x.entities;
-
-import me.rene.x.utils.Vector2;
+package com.gmail.greiling_rn.untitledTopDown.entities;
 
 public abstract class Enemy extends LivingEntity {
     public Enemy(){}

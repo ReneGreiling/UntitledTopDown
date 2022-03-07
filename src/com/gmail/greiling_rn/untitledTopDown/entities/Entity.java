@@ -1,8 +1,8 @@
-package me.rene.x.entities;
+package com.gmail.greiling_rn.untitledTopDown.entities;
 
-import me.rene.x.Main;
-import me.rene.x.gm.GameManager;
-import me.rene.x.utils.Vector2;
+import com.gmail.greiling_rn.untitledTopDown.gm.GameManager;
+import com.gmail.greiling_rn.untitledTopDown.Main;
+import com.gmail.greiling_rn.untitledTopDown.utils.Vector2;
 
 public abstract class Entity {
 

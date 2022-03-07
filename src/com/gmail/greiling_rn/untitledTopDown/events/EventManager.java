@@ -1,9 +1,9 @@
-package me.rene.x.events;
+package com.gmail.greiling_rn.untitledTopDown.events;
 
-import me.rene.x.Main;
-import me.rene.x.gm.GameManager;
-import me.rene.x.particle.TextParticle;
-import me.rene.x.utils.Vector2;
+import com.gmail.greiling_rn.untitledTopDown.gm.GameManager;
+import com.gmail.greiling_rn.untitledTopDown.Main;
+import com.gmail.greiling_rn.untitledTopDown.particle.TextParticle;
+import com.gmail.greiling_rn.untitledTopDown.utils.Vector2;
 
 import java.awt.*;
 

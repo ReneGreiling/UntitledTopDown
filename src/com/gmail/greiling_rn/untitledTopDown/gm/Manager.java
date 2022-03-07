@@ -1,4 +1,4 @@
-package me.rene.x.gm;
+package com.gmail.greiling_rn.untitledTopDown.gm;
 
 import java.awt.*;
 

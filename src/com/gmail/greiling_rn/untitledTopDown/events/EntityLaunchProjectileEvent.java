@@ -1,7 +1,7 @@
-package me.rene.x.events;
+package com.gmail.greiling_rn.untitledTopDown.events;
 
-import me.rene.x.entities.Entity;
-import me.rene.x.entities.Projectile;
+import com.gmail.greiling_rn.untitledTopDown.entities.Entity;
+import com.gmail.greiling_rn.untitledTopDown.entities.Projectile;
 
 public class EntityLaunchProjectileEvent extends Event {
     private Entity launcher;

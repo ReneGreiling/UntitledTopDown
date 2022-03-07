@@ -1,12 +1,19 @@
-package me.rene.x.gm;
+package com.gmail.greiling_rn.untitledTopDown.gm;
 
+import com.gmail.greiling_rn.untitledTopDown.entities.Dummy;
+import com.gmail.greiling_rn.untitledTopDown.entities.Entity;
+import com.gmail.greiling_rn.untitledTopDown.entities.Player;
+import com.gmail.greiling_rn.untitledTopDown.entities.Projectile;
+import com.gmail.greiling_rn.untitledTopDown.events.EntityLaunchProjectileEvent;
+import com.gmail.greiling_rn.untitledTopDown.events.EventManager;
+import com.gmail.greiling_rn.untitledTopDown.events.PlayerMoveEvent;
 import me.rene.x.entities.*;
 import me.rene.x.events.*;
-import me.rene.x.io.Input;
-import me.rene.x.particle.Particle;
-import me.rene.x.particle.TextParticle;
-import me.rene.x.utils.Camera;
-import me.rene.x.utils.Vector2;
+import com.gmail.greiling_rn.untitledTopDown.io.Input;
+import com.gmail.greiling_rn.untitledTopDown.particle.Particle;
+import com.gmail.greiling_rn.untitledTopDown.particle.TextParticle;
+import com.gmail.greiling_rn.untitledTopDown.utils.Camera;
+import com.gmail.greiling_rn.untitledTopDown.utils.Vector2;
 
 import java.awt.*;
 import java.util.ArrayList;

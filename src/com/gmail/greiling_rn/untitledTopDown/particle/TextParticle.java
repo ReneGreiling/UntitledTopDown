@@ -1,6 +1,6 @@
-package me.rene.x.particle;
+package com.gmail.greiling_rn.untitledTopDown.particle;
 
-import me.rene.x.utils.Vector2;
+import com.gmail.greiling_rn.untitledTopDown.utils.Vector2;
 
 import java.awt.*;
 
